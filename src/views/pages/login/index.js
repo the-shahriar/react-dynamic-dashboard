@@ -6,7 +6,8 @@ import LoginForm from "../../components/login_form";
 const Login = () => {
   const [error, setError] = useState(null);
 
-  const { loginAction } = useAuth();
+  const { loginAction, user, logoutAction } = useAuth();
+  console.log(user);
 
   // on submit form
   const onSubmit = (e) => {

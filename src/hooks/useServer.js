@@ -12,9 +12,10 @@ const useServer = () => {
     setLoading(true);
     axios
       .post("http://localhost:8000/api/v1/auth/login", data)
-      .then((data) => {
-        if (data) {
-          setUser(data.data);
+      .then((res) => {
+        if (res) {
+          const user = JSON.stringify(res.data.data);
+          localStorage.setItem("user", user);
         }
       })
       .catch((error) => {
@@ -22,42 +23,31 @@ const useServer = () => {
       })
       .finally(() => setLoading(false));
   };
-  // get all user
-  // useEffect(() => {
-  //   const loggedInUser = localStorage.getItem("user");
-  //   console.log(loggedInUser);
-  //   if (loggedInUser) {
-  //     const foundUser = JSON.parse(loggedInUser);
-  //     setUser(foundUser);
-  //   }
-  // }, []);
 
+  // get all user
   useEffect(() => {
-    setLoading(true);
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      console.log(foundUser);
+      setUser(foundUser);
+    } else {
+      setUser({});
+    }
+  }, []);
+
+  const logoutAction = () => {
     axios
-      .get("http://localhost:8000/api/v1/auth-user")
+      .post("http://localhost:8000/api/v1/auth/logout")
       .then((data) => {
-        setUser(data.data);
+        if (data) {
+          setUser({});
+        }
       })
       .catch((error) => {
         setError(error.status);
-      })
-      .finally(() => setLoading(false));
-  }, []);
-
-  // const logoutAction = () => {
-  //   axios
-  //     .get("http://localhost:5000/app/auth/logout")
-  //     .then((data) => {
-  //       if (data.data.status === "unsuccessfull") {
-  //         setUser({});
-  //         return 1;
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       setError(error.status);
-  //     });
-  // };
+      });
+  };
 
   return {
     user,
@@ -65,6 +55,7 @@ const useServer = () => {
     error,
     loading,
     loginAction,
+    logoutAction,
   };
 };
 export default useServer;
