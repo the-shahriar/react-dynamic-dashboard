@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import loginImage from "../../../assets/images/login.png";
+import useAuth from "../../../hooks/useAuth";
 import LoginForm from "../../components/login_form";
 
 const Login = () => {
   const [error, setError] = useState(null);
+
+  const { loginAction } = useAuth();
 
   // on submit form
   const onSubmit = (e) => {
@@ -11,14 +14,16 @@ const Login = () => {
     e.preventDefault();
     if (!e.target.email.value) {
       setError("Please enter email address");
-    }
-    if (!e.target.password.value) {
+    } else if (!e.target.password.value) {
       setError("Please enter password");
+    } else {
+      const body = {
+        email: e.target.email.value,
+        password: e.target.password.value,
+      };
+
+      loginAction(body);
     }
-    const body = {
-      email: e.target.email.value,
-      password: e.target.password.value,
-    };
   };
 
   return (

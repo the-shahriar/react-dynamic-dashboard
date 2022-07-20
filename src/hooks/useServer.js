@@ -8,13 +8,13 @@ const useServer = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const login = async (data) => {
+  const loginAction = async (data) => {
     setLoading(true);
     axios
       .post("http://localhost:8000/api/v1/auth/login", data)
       .then((data) => {
         if (data) {
-          setUser(data.data.user);
+          setUser(data.data);
         }
       })
       .catch((error) => {
@@ -35,9 +35,9 @@ const useServer = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5000/app/auth")
+      .get("http://localhost:8000/api/v1/auth-user")
       .then((data) => {
-        setUser(data.data.user);
+        setUser(data.data);
       })
       .catch((error) => {
         setError(error.status);
@@ -64,7 +64,7 @@ const useServer = () => {
     setUser,
     error,
     loading,
-    login,
+    loginAction,
   };
 };
 export default useServer;
