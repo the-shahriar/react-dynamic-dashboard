@@ -1,6 +1,6 @@
 import React from "react";
 
-const LoginForm = ({ onSubmit }) => {
+const LoginForm = ({ onSubmit, error }) => {
   return (
     <div className="md:w-8/12 lg:w-5/12 lg:ml-20">
       <form onSubmit={onSubmit}>
@@ -31,6 +31,7 @@ const LoginForm = ({ onSubmit }) => {
         >
           Login
         </button>
+        {error && <p className="text-red-600 mt-3">{error}</p>}
       </form>
     </div>
   );

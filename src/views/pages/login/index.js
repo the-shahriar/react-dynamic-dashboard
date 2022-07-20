@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import loginImage from "../../../assets/images/login.png";
 import LoginForm from "../../components/login_form";
 
 const Login = () => {
+  const [error, setError] = useState(null);
+
+  // on submit form
   const onSubmit = (e) => {
+    setError(null);
     e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-    console.log(email, password);
+    if (!e.target.email.value) {
+      setError("Please enter email address");
+    }
+    if (!e.target.password.value) {
+      setError("Please enter password");
+    }
+    const body = {
+      email: e.target.email.value,
+      password: e.target.password.value,
+    };
   };
 
   return (
@@ -20,7 +31,7 @@ const Login = () => {
               <img src={loginImage} className="w-full" alt="Phone" />
             </div>
             {/* Login form */}
-            <LoginForm onSubmit={onSubmit} />
+            <LoginForm onSubmit={onSubmit} error={error} />
           </div>
         </div>
       </section>
