@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import loginImage from "../../../assets/images/login.png";
 import useAuth from "../../../hooks/useAuth";
 import LoginForm from "../../components/login_form";
@@ -6,8 +7,15 @@ import LoginForm from "../../components/login_form";
 const Login = () => {
   const [error, setError] = useState(null);
 
-  const { loginAction, user, logoutAction } = useAuth();
-  console.log(user);
+  // use auth
+  const { loginAction, user } = useAuth();
+
+  //
+  const navigate = useNavigate();
+
+  if (user?.email) {
+    return <Navigate to="home" replace />;
+  }
 
   // on submit form
   const onSubmit = (e) => {
@@ -22,8 +30,9 @@ const Login = () => {
         email: e.target.email.value,
         password: e.target.password.value,
       };
-
+      // login
       loginAction(body);
+      navigate("home");
     }
   };
 
@@ -37,7 +46,11 @@ const Login = () => {
               <img src={loginImage} className="w-full" alt="Phone" />
             </div>
             {/* Login form */}
-            <LoginForm onSubmit={onSubmit} error={error} />
+            <div className="md:w-8/12 lg:w-5/12 lg:ml-20">
+              <form onSubmit={onSubmit}>
+                <LoginForm error={error} />
+              </form>
+            </div>
           </div>
         </div>
       </section>

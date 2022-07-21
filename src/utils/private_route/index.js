@@ -1,31 +1,12 @@
 import React from "react";
-import { Navigate, Route } from "react-router";
-import useAuth from "../../hooks/useAuth";
+import { Navigate, Outlet } from "react-router";
 
-const PrivateRoute = ({ children, ...rest }) => {
-  const { user, loading } = useAuth();
-
+const PrivateRoute = ({ user, loading }) => {
   if (loading) {
     return <p>Loading...</p>;
   }
 
-  return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        user.email ? (
-          children
-        ) : (
-          <Navigate
-            to={{
-              pathname: "/",
-              state: { from: location },
-            }}
-          />
-        )
-      }
-    />
-  );
+  return user?.email ? <Outlet /> : <Navigate to="/" replace />;
 };
 
 export default PrivateRoute;

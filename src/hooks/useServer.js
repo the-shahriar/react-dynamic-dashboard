@@ -8,12 +8,13 @@ const useServer = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const loginAction = async (data) => {
+  const loginAction = (data) => {
     setLoading(true);
     axios
       .post("http://localhost:8000/api/v1/auth/login", data)
       .then((res) => {
         if (res) {
+          setUser(res.data.data);
           const user = JSON.stringify(res.data.data);
           localStorage.setItem("user", user);
         }
@@ -29,14 +30,13 @@ const useServer = () => {
     const loggedInUser = localStorage.getItem("user");
     if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser);
-      console.log(foundUser);
       setUser(foundUser);
-    } else {
-      setUser({});
     }
   }, []);
 
+  // logout
   const logoutAction = () => {
+    localStorage.removeItem("user");
     axios
       .post("http://localhost:8000/api/v1/auth/logout")
       .then((data) => {
