@@ -6,7 +6,8 @@ import Home from "./views/pages/home";
 import PrivateRoute from "./utils/private_route";
 
 function App() {
-  const { user, loading } = useAuth();
+  const { context } = useAuth();
+  const { user, loading } = context;
 
   return (
     <BrowserRouter>

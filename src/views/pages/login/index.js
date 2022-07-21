@@ -8,7 +8,8 @@ const Login = () => {
   const [error, setError] = useState(null);
 
   // use auth
-  const { loginAction, user } = useAuth();
+  const { context } = useAuth();
+  const { loginAction, user } = context;
 
   //
   const navigate = useNavigate();
