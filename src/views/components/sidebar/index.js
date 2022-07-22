@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 
 const Sidebar = () => {
-  const { data } = useAuth();
+  const { data, context } = useAuth();
   const { addComponent } = data;
+  const { user } = context;
 
   return (
     <aside className="z-20 hidden w-48 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
@@ -42,7 +43,7 @@ const Sidebar = () => {
           <li className="relative px-6 py-3">
             <button
               className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-              onClick={() => addComponent("active")}
+              onClick={() => addComponent(user?.id, "active")}
             >
               <svg
                 className="w-5 h-5"
@@ -62,7 +63,7 @@ const Sidebar = () => {
           <li className="relative px-6 py-3">
             <button
               className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-              onClick={() => addComponent("gender")}
+              onClick={() => addComponent(user?.id, "gender")}
             >
               <svg
                 className="w-5 h-5"
@@ -82,7 +83,7 @@ const Sidebar = () => {
           <li className="relative px-6 py-3">
             <button
               className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-              onClick={() => addComponent("device")}
+              onClick={() => addComponent(user?.id, "device")}
             >
               <svg
                 className="w-5 h-5"
@@ -102,7 +103,7 @@ const Sidebar = () => {
           <li className="relative px-6 py-3">
             <button
               className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-              onClick={() => addComponent("country")}
+              onClick={() => addComponent(user?.id, "country")}
             >
               <svg
                 className="w-5 h-5"
@@ -122,7 +123,7 @@ const Sidebar = () => {
           <li className="relative px-6 py-3">
             <button
               className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-              onClick={() => addComponent("manage")}
+              onClick={() => addComponent(user?.id, "manage")}
             >
               <svg
                 className="w-5 h-5"
@@ -142,7 +143,7 @@ const Sidebar = () => {
           <li className="relative px-6 py-3">
             <button
               className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-              onClick={() => addComponent("top15")}
+              onClick={() => addComponent(user?.id, "top15")}
             >
               <svg
                 className="w-5 h-5"

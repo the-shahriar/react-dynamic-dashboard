@@ -11,8 +11,10 @@ const Header = React.lazy(() => import("../../components/header"));
 const Sidebar = React.lazy(() => import("../../components/sidebar"));
 
 const Home = () => {
-  const { data } = useAuth();
-  const { component, showBtn, setShowBtn, setComponent } = data;
+  const { data, context } = useAuth();
+  const { component, showBtn, setShowBtn, setComponent, removeComponent } =
+    data;
+  const { user } = context;
 
   const componentToRender = (component) => {
     // eslint-disable-next-line array-callback-return
@@ -37,8 +39,22 @@ const Home = () => {
 
   // update localstorage
   const updateData = (component) => {
-    localStorage.setItem("component", JSON.stringify(component));
-    setShowBtn(false);
+    let exist = localStorage.getItem("component")
+      ? JSON.parse(localStorage.getItem("component"))
+      : {};
+    if (exist[user.id]) {
+      Object.keys(exist).forEach((key) => {
+        if (key === user.id) {
+          exist[key] = component;
+          localStorage.setItem("component", JSON.stringify(exist));
+          setShowBtn(false);
+        }
+      });
+    } else {
+      exist[user.id] = component;
+      localStorage.setItem("component", JSON.stringify(exist));
+      setShowBtn(false);
+    }
   };
 
   // clearAll from localStorage
@@ -63,7 +79,7 @@ const Home = () => {
           </div>
         )}
 
-        {component.length && (
+        {component.length > 0 && (
           <div className="pr-5 flex justify-end items-center mt-4">
             <button
               onClick={() => removeAll()}

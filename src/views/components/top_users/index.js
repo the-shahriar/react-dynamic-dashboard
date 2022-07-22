@@ -7,8 +7,9 @@ const TopUsers = ({ name }) => {
   const [userData, setUserData] = useState([]);
 
   // get remove componet function from provider
-  const { data } = useAuth();
+  const { data, context } = useAuth();
   const { removeComponent } = data;
+  const { user } = context;
 
   // fetch data from server
   useEffect(() => {
@@ -35,7 +36,9 @@ const TopUsers = ({ name }) => {
             Top 15 Users (By Milliseconds)
           </h4>
           {/* Remove component from render screen */}
-          <button onClick={() => removeComponent(name)}>&#10060;</button>
+          <button onClick={() => removeComponent(user.id, name)}>
+            &#10060;
+          </button>
         </div>
         <BarChart width={500} height={300} data={sortedData}>
           <XAxis dataKey="email" stroke="#8884d8" />

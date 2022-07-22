@@ -4,8 +4,9 @@ import useAuth from "../../../hooks/useAuth";
 
 const AddUser = ({ name }) => {
   // get remove componet function from provider
-  const { data } = useAuth();
+  const { data, context } = useAuth();
   const { removeComponent } = data;
+  const { user } = context;
 
   // submit form
   const handleAddUser = (e) => {
@@ -37,7 +38,9 @@ const AddUser = ({ name }) => {
         <div className="flex justify-between items-center">
           <h4 className="mb-4 font-semibold text-black">Add User</h4>
           {/* Remove component from render screen */}
-          <button onClick={() => removeComponent(name)}>&#10060;</button>
+          <button onClick={() => removeComponent(user.id, name)}>
+            &#10060;
+          </button>
         </div>
         <div className="py-2 bg-gray-50">
           <form onSubmit={handleAddUser}>

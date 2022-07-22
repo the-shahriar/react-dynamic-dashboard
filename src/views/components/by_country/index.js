@@ -4,8 +4,9 @@ import axios from "axios";
 
 const FilterByCountry = ({ name }) => {
   // get remove componet function from provider
-  const { data } = useAuth();
+  const { data, context } = useAuth();
   const { removeComponent } = data;
+  const { user } = context;
 
   const [users, setUsers] = useState([]);
   const [countryName, setCountryName] = useState("");
@@ -56,7 +57,9 @@ const FilterByCountry = ({ name }) => {
               Country Wise Users
             </h4>
             {/* Remove component from render screen */}
-            <button onClick={() => removeComponent(name)}>&#10060;</button>
+            <button onClick={() => removeComponent(user.id, name)}>
+              &#10060;
+            </button>
           </div>
           <div className="w-full overflow-x-auto">
             <div className="flex justify-end items-center mt-2">

@@ -15,8 +15,9 @@ const ActiveUsers = ({ name }) => {
   const [userData, setUserData] = useState([]);
 
   // get remove componet function from provider
-  const { data } = useAuth();
+  const { data, context } = useAuth();
   const { removeComponent } = data;
+  const { user } = context;
 
   // fetch data from server
   useEffect(() => {
@@ -36,7 +37,9 @@ const ActiveUsers = ({ name }) => {
         <div className="flex justify-between items-center">
           <h4 className="mb-4 font-semibold text-black">Active Users</h4>
           {/* Remove component from render screen */}
-          <button onClick={() => removeComponent(name)}>&#10060;</button>
+          <button onClick={() => removeComponent(user.id, name)}>
+            &#10060;
+          </button>
         </div>
         <BarChart width={500} height={300} data={userData}>
           <XAxis dataKey="name" stroke="#8884d8" />

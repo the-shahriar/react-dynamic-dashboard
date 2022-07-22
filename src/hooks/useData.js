@@ -1,29 +1,52 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const useData = () => {
   const [component, setComponent] = useState([]);
   const [showBtn, setShowBtn] = useState(false);
 
-  useEffect(() => {
-    const storedComponent = localStorage.getItem("component")
+  // store renderer component to localStorage for future use
+  const addComponent = (id, name) => {
+    let exist = localStorage.getItem("component")
       ? JSON.parse(localStorage.getItem("component"))
-      : [];
-    if (storedComponent.length > component.length) {
-      setComponent(storedComponent);
+      : {};
+    if (exist[id]) {
+      console.log("hi");
+      Object.entries(exist).forEach(([key, value]) => {
+        if (key === id) {
+          let arr = [...value, name];
+          exist[key] = arr;
+          setComponent(arr);
+          setShowBtn(true);
+        } else {
+          let arr = [...value, name];
+          exist[key] = arr;
+          setComponent(arr);
+          setShowBtn(true);
+        }
+      });
+    } else {
+      let arr = [...component, name];
+      exist[id] = arr;
+      setComponent(arr);
+      setShowBtn(true);
     }
-  }, [component]);
-
-  const addComponent = (name) => {
-    localStorage.setItem("old_component", JSON.stringify(component));
-    const newArray = [...component, name];
-    setComponent(newArray);
-    setShowBtn(true);
   };
 
-  const removeComponent = (name) => {
-    const newArray = component.filter((item) => item !== name);
-    console.log(newArray);
-    // localStorage.setItem("component", JSON.stringify(newArray));
+  const removeComponent = (id, name) => {
+    console.log(id, name);
+    let exist = localStorage.getItem("component")
+      ? JSON.parse(localStorage.getItem("component"))
+      : {};
+    if (exist[id]) {
+      Object.entries(exist).forEach(([key, value]) => {
+        if (key === id) {
+          let updated = value.filter((item) => item !== name);
+          console.log(updated);
+          setComponent(updated);
+          setShowBtn(true);
+        }
+      });
+    }
   };
 
   return {
