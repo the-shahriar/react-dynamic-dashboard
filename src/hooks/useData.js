@@ -10,7 +10,6 @@ const useData = () => {
       ? JSON.parse(localStorage.getItem("component"))
       : {};
     if (exist[id]) {
-      console.log("hi");
       Object.entries(exist).forEach(([key, value]) => {
         if (key === id) {
           let arr = [...value, name];
@@ -33,7 +32,6 @@ const useData = () => {
   };
 
   const removeComponent = (id, name) => {
-    console.log(id, name);
     let exist = localStorage.getItem("component")
       ? JSON.parse(localStorage.getItem("component"))
       : {};
@@ -41,7 +39,6 @@ const useData = () => {
       Object.entries(exist).forEach(([key, value]) => {
         if (key === id) {
           let updated = value.filter((item) => item !== name);
-          console.log(updated);
           setComponent(updated);
           setShowBtn(true);
         }
