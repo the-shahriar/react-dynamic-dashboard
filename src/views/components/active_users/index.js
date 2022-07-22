@@ -9,16 +9,21 @@ import {
   Legend,
   CartesianGrid,
 } from "recharts";
+import useAuth from "../../../hooks/useAuth";
 
 const ActiveUsers = ({ name }) => {
-  const [data, setData] = useState([]);
+  const [userData, setUserData] = useState([]);
+
+  // get remove componet function from provider
+  const { data } = useAuth();
+  const { removeComponent } = data;
 
   // fetch data from server
   useEffect(() => {
     axios
       .get("http://localhost:8000/api/v1/active-user/all")
       .then((res) => {
-        setData(res.data.data);
+        setUserData(res.data.data);
       })
       .catch((error) => {
         console.log("on active_users fetching", error);
@@ -30,9 +35,10 @@ const ActiveUsers = ({ name }) => {
       <div className="min-w-0 p-4 bg-gray-50 rounded-lg shadow-xs">
         <div className="flex justify-between items-center">
           <h4 className="mb-4 font-semibold text-black">Active Users</h4>
-          <button onClick={() => console.log(name)}>&#10060;</button>
+          {/* Remove component from render screen */}
+          <button onClick={() => removeComponent(name)}>&#10060;</button>
         </div>
-        <BarChart width={450} height={300} data={data}>
+        <BarChart width={450} height={300} data={userData}>
           <XAxis dataKey="name" stroke="#8884d8" />
           <YAxis />
           <Tooltip wrapperStyle={{ width: 100, backgroundColor: "#ccc" }} />

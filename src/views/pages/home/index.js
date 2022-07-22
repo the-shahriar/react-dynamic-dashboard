@@ -3,6 +3,7 @@ import useAuth from "../../../hooks/useAuth";
 const ActiveUsers = React.lazy(() => import("../../components/active_users"));
 const Header = React.lazy(() => import("../../components/header"));
 const Sidebar = React.lazy(() => import("../../components/sidebar"));
+const NoData = React.lazy(() => import("../../components/no_data/index"));
 
 const Home = () => {
   const { data } = useAuth();
@@ -35,10 +36,14 @@ const Home = () => {
       <Sidebar />
       <div className="flex flex-col flex-1 w-4/5">
         <Header />
-        <div className="px-5 py-4 grid grid-cols-2 gap-4">
-          {/* Update Button */}
-          {componentToRender(component)}
-        </div>
+        {/* Show Component on Screen */}
+        {componentToRender(component).length ? (
+          <div className="px-5 py-4 grid grid-cols-2 gap-4">
+            {componentToRender(component)}
+          </div>
+        ) : (
+          <NoData />
+        )}
       </div>
     </div>
   );

@@ -22,7 +22,8 @@ const useData = () => {
 
   const removeComponent = (name) => {
     const newArray = component.filter((item) => item !== name);
-    setComponent(newArray);
+    console.log(newArray);
+    // localStorage.setItem("component", JSON.stringify(newArray));
   };
 
   return {
