@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  CartesianGrid,
-} from "recharts";
+import { BarChart, Bar, XAxis, Tooltip, Legend, CartesianGrid } from "recharts";
 import useAuth from "../../../hooks/useAuth";
 
 const TopUsers = ({ name }) => {

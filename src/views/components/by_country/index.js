@@ -95,7 +95,7 @@ const FilterByCountry = ({ name }) => {
                 )}
 
                 {slicedUsers.map((user) => (
-                  <tr key={user.id} className="text-black">
+                  <tr key={user._id} className="text-black">
                     <td className="px-4 py-3 text-sm uppercase text-black">
                       {user?.email}
                     </td>

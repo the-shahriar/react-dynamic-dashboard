@@ -6,12 +6,13 @@ import FilterByDevice from "../../components/by_device";
 import FilterByGender from "../../components/by_gender";
 import FilterByCountry from "../../components/by_country";
 import TopUsers from "../../components/top_users";
+import AddUser from "../../components/add_user";
 const Header = React.lazy(() => import("../../components/header"));
 const Sidebar = React.lazy(() => import("../../components/sidebar"));
 
 const Home = () => {
   const { data } = useAuth();
-  const { component, showBtn, setShowBtn } = data;
+  const { component, showBtn, setShowBtn, setComponent } = data;
 
   const componentToRender = (component) => {
     // eslint-disable-next-line array-callback-return
@@ -27,16 +28,23 @@ const Home = () => {
         case "country":
           return <FilterByCountry key={index} name={name} />;
         case "manage":
-          return <FilterByDevice key={index} name={name} />;
+          return <AddUser key={index} name={name} />;
         case "top15":
           return <TopUsers key={index} name={name} />;
       }
     });
   };
 
+  // update localstorage
   const updateData = (component) => {
     localStorage.setItem("component", JSON.stringify(component));
     setShowBtn(false);
+  };
+
+  // clearAll from localStorage
+  const removeAll = () => {
+    localStorage.removeItem("component");
+    setComponent([]);
   };
 
   return (
@@ -51,6 +59,17 @@ const Home = () => {
               className="bg-white dark:bg-indigo-500 text-gray-50 px-4 py-2 mr-0"
             >
               Save <span className="text-lg">&#43;</span>
+            </button>
+          </div>
+        )}
+
+        {component.length && (
+          <div className="pr-5 flex justify-end items-center mt-4">
+            <button
+              onClick={() => removeAll()}
+              className="bg-white dark:bg-gray-600 text-gray-50 px-4 py-2 mr-0"
+            >
+              Remove All
             </button>
           </div>
         )}
