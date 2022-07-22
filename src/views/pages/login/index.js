@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import loginImage from "../../../assets/images/login.png";
 import useAuth from "../../../hooks/useAuth";
-import LoginForm from "../../components/login_form";
+const LoginForm = React.lazy(() => import("../../components/login_form"));
 
 const Login = () => {
   const [error, setError] = useState(null);

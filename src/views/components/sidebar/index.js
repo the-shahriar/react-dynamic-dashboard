@@ -7,7 +7,7 @@ const Sidebar = () => {
   const { addComponent } = data;
 
   return (
-    <aside className="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
+    <aside className="z-20 hidden w-48 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
       <div className="py-4 text-gray-500 dark:text-gray-400 ">
         <p className="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200">
           Tier 5
@@ -56,7 +56,7 @@ const Sidebar = () => {
               >
                 <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
               </svg>
-              <span className="ml-4">DAU/WAU/MAU</span>
+              <span className="ml-4">Active Users</span>
             </button>
           </li>
           <li className="relative px-6 py-3">
@@ -76,7 +76,7 @@ const Sidebar = () => {
               >
                 <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
               </svg>
-              <span className="ml-4">Users</span>
+              <span className="ml-4">Segmentation</span>
             </button>
           </li>
           <li className="relative px-6 py-3">
@@ -96,7 +96,7 @@ const Sidebar = () => {
               >
                 <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
               </svg>
-              <span className="ml-4">Add/Remove User</span>
+              <span className="ml-4">Add/Remove</span>
             </button>
           </li>
           <li className="relative px-6 py-3">
@@ -116,7 +116,7 @@ const Sidebar = () => {
               >
                 <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
               </svg>
-              <span className="ml-4">Top 15 Users</span>
+              <span className="ml-4">Top 15</span>
             </button>
           </li>
         </ul>

@@ -30,6 +30,7 @@ const useData = () => {
     addComponent,
     removeComponent,
     showBtn,
+    setShowBtn,
   };
 };
 

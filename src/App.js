@@ -1,9 +1,10 @@
+import React from "react";
 import Login from "./views/pages/login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import NotFound from "./views/pages/404";
 import useAuth from "./hooks/useAuth";
-import Home from "./views/pages/home";
-import PrivateRoute from "./utils/private_route";
+const Home = React.lazy(() => import("./views/pages/home"));
+const NotFound = React.lazy(() => import("./views/pages/404"));
+const PrivateRoute = React.lazy(() => import("./utils/private_route"));
 
 function App() {
   const { context } = useAuth();

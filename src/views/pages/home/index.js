@@ -1,11 +1,12 @@
 import React from "react";
 import useAuth from "../../../hooks/useAuth";
-import Header from "../../components/header";
-import Sidebar from "../../components/sidebar";
+const ActiveUsers = React.lazy(() => import("../../components/active_users"));
+const Header = React.lazy(() => import("../../components/header"));
+const Sidebar = React.lazy(() => import("../../components/sidebar"));
 
 const Home = () => {
   const { data } = useAuth();
-  const { component, showBtn } = data;
+  const { component, showBtn, setShowBtn } = data;
 
   const componentToRender = (component) => {
     // eslint-disable-next-line array-callback-return
@@ -13,19 +14,20 @@ const Home = () => {
       // eslint-disable-next-line default-case
       switch (name) {
         case "active":
-          return <p key={index}>{name}</p>;
+          return <ActiveUsers key={index} name={name} />;
         case "filter":
-          return <p key={index}>{name}</p>;
+          return <ActiveUsers key={index} name={name} />;
         case "add":
-          return <p key={index}>{name}</p>;
+          return <ActiveUsers key={index} name={name} />;
         case "top15":
-          return <p key={index}>{name}</p>;
+          return <ActiveUsers key={index} name={name} />;
       }
     });
   };
 
   const updateData = (component) => {
     localStorage.setItem("component", JSON.stringify(component));
+    setShowBtn(false);
   };
 
   return (
@@ -33,19 +35,10 @@ const Home = () => {
       <Sidebar />
       <div className="flex flex-col flex-1 w-4/5">
         <Header />
-        <div className="px-5 py-4">{componentToRender(component)}</div>
-        <p className="px-5">
-          {showBtn ? (
-            <button
-              className="px-4 py-3 bg-blue-200 text-black"
-              onClick={() => updateData(component)}
-            >
-              Update Data
-            </button>
-          ) : (
-            "No Btn"
-          )}
-        </p>
+        <div className="px-5 py-4 grid grid-cols-2 gap-4">
+          {/* Update Button */}
+          {componentToRender(component)}
+        </div>
       </div>
     </div>
   );
