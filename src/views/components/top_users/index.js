@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import useAuth from "../../../hooks/useAuth";
 
-const ActiveUsers = ({ name }) => {
+const TopUsers = ({ name }) => {
   const [userData, setUserData] = useState([]);
 
   // get remove componet function from provider
@@ -21,27 +21,33 @@ const ActiveUsers = ({ name }) => {
   // fetch data from server
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/v1/active-user/all")
+      .get("http://localhost:8000/api/v1/filter/byUsageTime")
       .then((res) => {
         setUserData(res.data.data);
       })
       .catch((error) => {
-        console.log("on active_users fetching", error);
+        console.log("on top_users fetching", error);
       });
   }, []);
+
+  // sorting by duration
+  const sortedData = userData.sort(function (a, b) {
+    return b.duration - a.duration;
+  });
 
   return (
     <div className="drop-shadow-lg">
       <div className="min-w-0 p-4 bg-gray-50 rounded-lg shadow-xs">
         <div className="flex justify-between items-center">
-          <h4 className="mb-4 font-semibold text-black">Active Users</h4>
+          <h4 className="mb-4 font-semibold text-black">
+            Top 15 Users (By Milliseconds)
+          </h4>
           {/* Remove component from render screen */}
           <button onClick={() => removeComponent(name)}>&#10060;</button>
         </div>
-        <BarChart width={500} height={300} data={userData}>
-          <XAxis dataKey="name" stroke="#8884d8" />
-          <YAxis />
-          <Tooltip wrapperStyle={{ width: 100, backgroundColor: "#ccc" }} />
+        <BarChart width={500} height={300} data={sortedData}>
+          <XAxis dataKey="email" stroke="#8884d8" />
+          <Tooltip wrapperStyle={{ width: 180, backgroundColor: "#ccc" }} />
           <Legend
             width={100}
             wrapperStyle={{
@@ -54,11 +60,11 @@ const ActiveUsers = ({ name }) => {
             }}
           />
           <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-          <Bar dataKey="value" fill="#8884d8" barSize={30} />
+          <Bar dataKey="duration" fill="#8884d8" barSize={25} />
         </BarChart>
       </div>
     </div>
   );
 };
 
-export default ActiveUsers;
+export default TopUsers;

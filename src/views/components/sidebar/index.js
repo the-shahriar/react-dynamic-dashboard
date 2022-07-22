@@ -62,7 +62,7 @@ const Sidebar = () => {
           <li className="relative px-6 py-3">
             <button
               className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-              onClick={() => addComponent("filter")}
+              onClick={() => addComponent("gender")}
             >
               <svg
                 className="w-5 h-5"
@@ -76,13 +76,13 @@ const Sidebar = () => {
               >
                 <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
               </svg>
-              <span className="ml-4">Segmentation</span>
+              <span className="ml-4">By Gender</span>
             </button>
           </li>
           <li className="relative px-6 py-3">
             <button
               className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-              onClick={() => addComponent("add")}
+              onClick={() => addComponent("device")}
             >
               <svg
                 className="w-5 h-5"
@@ -96,7 +96,47 @@ const Sidebar = () => {
               >
                 <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
               </svg>
-              <span className="ml-4">Add/Remove</span>
+              <span className="ml-4">By Device</span>
+            </button>
+          </li>
+          <li className="relative px-6 py-3">
+            <button
+              className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+              onClick={() => addComponent("country")}
+            >
+              <svg
+                className="w-5 h-5"
+                aria-hidden="true"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+              </svg>
+              <span className="ml-4">By Country</span>
+            </button>
+          </li>
+          <li className="relative px-6 py-3">
+            <button
+              className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+              onClick={() => addComponent("manage")}
+            >
+              <svg
+                className="w-5 h-5"
+                aria-hidden="true"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+              </svg>
+              <span className="ml-4">Manage Users</span>
             </button>
           </li>
           <li className="relative px-6 py-3">
@@ -116,7 +156,7 @@ const Sidebar = () => {
               >
                 <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
               </svg>
-              <span className="ml-4">Top 15</span>
+              <span className="ml-4">Top 15 Users</span>
             </button>
           </li>
         </ul>
