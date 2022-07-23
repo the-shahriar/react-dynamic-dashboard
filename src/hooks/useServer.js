@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 axios.defaults.withCredentials = true;
 
@@ -11,14 +12,13 @@ const useServer = () => {
   const loginAction = (data) => {
     setLoading(true);
     axios
-      .post(
-        "https://blooming-citadel-15619.herokuapp.com/api/v1/auth/login",
-        data
-      )
+      .post("http://localhost:8000/api/v1/auth/login", data)
       .then((res) => {
         if (res) {
           setUser(res.data.data);
           const user = JSON.stringify(res.data.data);
+          Cookies.set("SSID", `${user.id}`);
+          Cookies.set("activityId", `${user.activityId}`);
           localStorage.setItem("user", user);
         }
       })
@@ -40,8 +40,10 @@ const useServer = () => {
   // logout
   const logoutAction = () => {
     localStorage.removeItem("user");
+    Cookies.remove("SSID");
+    Cookies.remove("activityId");
     axios
-      .post("https://blooming-citadel-15619.herokuapp.com/api/v1/auth/logout")
+      .post("http://localhost:8000/api/v1/auth/logout")
       .then((data) => {
         if (data) {
           setUser({});

@@ -15,9 +15,7 @@ const TopUsers = ({ name }) => {
   // fetch data from server
   useEffect(() => {
     axios
-      .get(
-        "https://blooming-citadel-15619.herokuapp.com/api/v1/filter/byUsageTime"
-      )
+      .get("http://localhost:8000/api/v1/filter/byUsageTime")
       .then((res) => {
         setUserData(res.data.data);
       })
@@ -26,10 +24,8 @@ const TopUsers = ({ name }) => {
       });
   }, []);
 
-  console.log(userData);
-
   // sorting by duration
-  const sortedData = userData.sort(function (a, b) {
+  const sortedData = userData?.sort(function (a, b) {
     return b.duration - a.duration;
   });
 

@@ -15,14 +15,11 @@ const FilterByCountry = ({ name }) => {
 
   useEffect(() => {
     axios
-      .get(
-        "https://blooming-citadel-15619.herokuapp.com/api/v1/filter/byCountry",
-        {
-          headers: {
-            country: countryName,
-          },
-        }
-      )
+      .get("http://localhost:8000/api/v1/filter/byCountry", {
+        headers: {
+          country: countryName,
+        },
+      })
       .then((res) => {
         setUsers(res.data.data.users);
       })
@@ -37,9 +34,7 @@ const FilterByCountry = ({ name }) => {
   // get countries list
   useEffect(() => {
     axios
-      .get(
-        "https://blooming-citadel-15619.herokuapp.com/api/v1/filter/country-list"
-      )
+      .get("http://localhost:8000/api/v1/filter/country-list")
       .then((res) => {
         setCountries(res.data.data.countries);
       })

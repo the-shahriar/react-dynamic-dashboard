@@ -14,14 +14,11 @@ const FilterByGender = ({ name }) => {
 
   useEffect(() => {
     axios
-      .get(
-        "https://blooming-citadel-15619.herokuapp.com/api/v1/filter/byGender",
-        {
-          headers: {
-            gender: genderName,
-          },
-        }
-      )
+      .get("http://localhost:8000/api/v1/filter/byGender", {
+        headers: {
+          gender: genderName,
+        },
+      })
       .then((res) => {
         setUsers(res.data.data.users);
       })
