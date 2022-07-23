@@ -21,7 +21,10 @@ const AddUser = ({ name }) => {
       password: password.value,
     };
     axios
-      .post("http://localhost:8000/api/v1/auth/add-user", body)
+      .post(
+        "https://blooming-citadel-15619.herokuapp.com/api/v1/auth/add-user",
+        body
+      )
       .then((res) => {
         if (res) {
           window.alert("Succesfully user has been created");

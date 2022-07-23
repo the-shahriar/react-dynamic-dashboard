@@ -23,7 +23,9 @@ const ActiveUsers = ({ name }) => {
   // fetch data from server
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/v1/active-user/all")
+      .get(
+        "https://blooming-citadel-15619.herokuapp.com/api/v1/active-user/all"
+      )
       .then((res) => {
         setUserData(res.data.data);
       })

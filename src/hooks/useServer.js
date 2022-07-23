@@ -11,7 +11,10 @@ const useServer = () => {
   const loginAction = (data) => {
     setLoading(true);
     axios
-      .post("http://localhost:8000/api/v1/auth/login", data)
+      .post(
+        "https://blooming-citadel-15619.herokuapp.com/api/v1/auth/login",
+        data
+      )
       .then((res) => {
         if (res) {
           setUser(res.data.data);
@@ -38,7 +41,7 @@ const useServer = () => {
   const logoutAction = () => {
     localStorage.removeItem("user");
     axios
-      .post("http://localhost:8000/api/v1/auth/logout")
+      .post("https://blooming-citadel-15619.herokuapp.com/api/v1/auth/logout")
       .then((data) => {
         if (data) {
           setUser({});

@@ -14,11 +14,14 @@ const FilterByDevice = ({ name }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/v1/filter/byDevice", {
-        headers: {
-          device: deviceName,
-        },
-      })
+      .get(
+        "https://blooming-citadel-15619.herokuapp.com/api/v1/filter/byDevice",
+        {
+          headers: {
+            device: deviceName,
+          },
+        }
+      )
       .then((res) => {
         setUsers(res.data.data.users);
       })

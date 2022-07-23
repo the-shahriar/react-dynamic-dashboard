@@ -12,20 +12,17 @@ const useData = () => {
     if (exist[id]) {
       Object.entries(exist).forEach(([key, value]) => {
         if (key === id) {
-          let arr = [...value, name];
-          exist[key] = arr;
+          let arr = [...component, name];
           setComponent(arr);
           setShowBtn(true);
         } else {
-          let arr = [...value, name];
-          exist[key] = arr;
+          let arr = [...component, name];
           setComponent(arr);
           setShowBtn(true);
         }
       });
     } else {
       let arr = [...component, name];
-      exist[id] = arr;
       setComponent(arr);
       setShowBtn(true);
     }
