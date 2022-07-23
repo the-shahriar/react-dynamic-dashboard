@@ -59,7 +59,14 @@ const Home = () => {
 
   // clearAll from localStorage
   const removeAll = () => {
-    localStorage.removeItem("component");
+    const exist = localStorage.getItem("component")
+      ? JSON.parse(localStorage.getItem("component"))
+      : {};
+    if (exist[user.id]) {
+      delete exist[user.id];
+    }
+
+    localStorage.setItem("component", JSON.stringify(exist));
     setComponent([]);
   };
 
