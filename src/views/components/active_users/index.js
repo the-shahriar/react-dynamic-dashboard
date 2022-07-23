@@ -10,6 +10,7 @@ import {
   CartesianGrid,
 } from "recharts";
 import useAuth from "../../../hooks/useAuth";
+import { Reorder } from "framer-motion";
 
 const ActiveUsers = ({ name }) => {
   const [userData, setUserData] = useState([]);
@@ -32,35 +33,37 @@ const ActiveUsers = ({ name }) => {
   }, []);
 
   return (
-    <div className="drop-shadow-lg">
-      <div className="min-w-0 p-4 bg-gray-50 rounded-lg shadow-xs">
-        <div className="flex justify-between items-center">
-          <h4 className="mb-4 font-semibold text-black">Active Users</h4>
-          {/* Remove component from render screen */}
-          <button onClick={() => removeComponent(user.id, name)}>
-            &#10060;
-          </button>
+    <Reorder.Item drag value={name} id={name}>
+      <div className="drop-shadow-lg cursor-all-scroll">
+        <div className="min-w-0 p-4 bg-gray-50 rounded-lg shadow-xs">
+          <div className="flex justify-between items-center">
+            <h4 className="mb-4 font-semibold text-black">Active Users</h4>
+            {/* Remove component from render screen */}
+            <button onClick={() => removeComponent(user.id, name)}>
+              &#10060;
+            </button>
+          </div>
+          <BarChart width={500} height={300} data={userData}>
+            <XAxis dataKey="name" stroke="#8884d8" />
+            <YAxis />
+            <Tooltip wrapperStyle={{ width: 100, backgroundColor: "#ccc" }} />
+            <Legend
+              width={100}
+              wrapperStyle={{
+                top: 10,
+                right: 10,
+                backgroundColor: "#f5f5f5",
+                border: "1px solid #d5d5d5",
+                borderRadius: 3,
+                lineHeight: "40px",
+              }}
+            />
+            <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+            <Bar dataKey="value" fill="#8884d8" barSize={30} />
+          </BarChart>
         </div>
-        <BarChart width={500} height={300} data={userData}>
-          <XAxis dataKey="name" stroke="#8884d8" />
-          <YAxis />
-          <Tooltip wrapperStyle={{ width: 100, backgroundColor: "#ccc" }} />
-          <Legend
-            width={100}
-            wrapperStyle={{
-              top: 10,
-              right: 10,
-              backgroundColor: "#f5f5f5",
-              border: "1px solid #d5d5d5",
-              borderRadius: 3,
-              lineHeight: "40px",
-            }}
-          />
-          <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-          <Bar dataKey="value" fill="#8884d8" barSize={30} />
-        </BarChart>
       </div>
-    </div>
+    </Reorder.Item>
   );
 };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import ActiveUsers from "../../components/active_users";
 import NoData from "../../components/no_data/index";
@@ -7,13 +7,13 @@ import FilterByGender from "../../components/by_gender";
 import FilterByCountry from "../../components/by_country";
 import TopUsers from "../../components/top_users";
 import AddUser from "../../components/add_user";
+import { Reorder } from "framer-motion";
 const Header = React.lazy(() => import("../../components/header"));
 const Sidebar = React.lazy(() => import("../../components/sidebar"));
 
 const Home = () => {
   const { data, context } = useAuth();
-  const { component, showBtn, setShowBtn, setComponent, removeComponent } =
-    data;
+  const { component, showBtn, setShowBtn, setComponent } = data;
   const { user } = context;
 
   const componentToRender = (component) => {
@@ -70,6 +70,12 @@ const Home = () => {
     setComponent([]);
   };
 
+  // functio to track drag event
+  const onDrag = (data) => {
+    setShowBtn(true);
+    setComponent(data);
+  };
+
   return (
     <div className="flex h-screen bg-gray-50">
       <Sidebar />
@@ -99,9 +105,11 @@ const Home = () => {
 
         {/* Show Component on Screen */}
         {componentToRender(component).length ? (
-          <div className="px-5 py-4 grid grid-cols-2 gap-4">
-            {componentToRender(component)}
-          </div>
+          <Reorder.Group values={component} onReorder={(data) => onDrag(data)}>
+            <div className="px-5 py-4 grid grid-cols-2 gap-4">
+              {componentToRender(component)}
+            </div>
+          </Reorder.Group>
         ) : (
           <NoData />
         )}
