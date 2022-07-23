@@ -14,7 +14,7 @@ const FilterByGender = ({ name }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/v1/filter/byGender", {
+      .get("https://tier-5-backend.herokuapp.com/api/v1/filter/byGender", {
         headers: {
           gender: genderName,
         },

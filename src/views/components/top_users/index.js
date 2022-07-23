@@ -15,7 +15,7 @@ const TopUsers = ({ name }) => {
   // fetch data from server
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/v1/filter/byUsageTime")
+      .get("https://tier-5-backend.herokuapp.com/api/v1/filter/byUsageTime")
       .then((res) => {
         setUserData(res.data.data);
       })

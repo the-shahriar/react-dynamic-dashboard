@@ -21,7 +21,7 @@ const AddUser = ({ name }) => {
       password: password.value,
     };
     axios
-      .post("http://localhost:8000/api/v1/auth/add-user", body)
+      .post("https://tier-5-backend.herokuapp.com/api/v1/auth/add-user", body)
       .then((res) => {
         if (res) {
           window.alert("Succesfully user has been created");

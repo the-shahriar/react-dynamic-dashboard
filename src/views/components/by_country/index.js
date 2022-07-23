@@ -15,7 +15,7 @@ const FilterByCountry = ({ name }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/v1/filter/byCountry", {
+      .get("https://tier-5-backend.herokuapp.com/api/v1/filter/byCountry", {
         headers: {
           country: countryName,
         },
@@ -34,7 +34,7 @@ const FilterByCountry = ({ name }) => {
   // get countries list
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/v1/filter/country-list")
+      .get("https://tier-5-backend.herokuapp.com/api/v1/filter/country-list")
       .then((res) => {
         setCountries(res.data.data.countries);
       })

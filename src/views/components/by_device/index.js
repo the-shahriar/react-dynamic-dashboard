@@ -14,7 +14,7 @@ const FilterByDevice = ({ name }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/v1/filter/byDevice", {
+      .get("https://tier-5-backend.herokuapp.com/api/v1/filter/byDevice", {
         headers: {
           device: deviceName,
         },
